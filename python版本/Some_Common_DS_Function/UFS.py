@@ -7,12 +7,14 @@ class UFS():
     def __init__(self):
         self.father = defaultdict(int)
         self.rank = []
+        self.count = 0
     
     #初始化这个并查集，每个人单独作为一个部分
     def Initialize(self,n):
         for i in range(n):
             self.father[i] = i
             self.rank.append(1)
+        self.counts = n
     
     def FindElem(self,x):
         if self.father[x] == x:
@@ -31,15 +33,15 @@ class UFS():
             return self.father[x]
     
     def MergeElemWithRank(self,x,y):
-        fa_x,fa_y = self.FindElemCompressPath(x),self.FindElemCompressPath(y)
-        if self.rank[fa_x] <= self.rank[fa_y]:
-            self.father[fa_x] = fa_y
-        
-        else:
-            self.father[fa_y] = fa_x
-        
-        if self.rank[fa_x] == self.rank[fa_y] and fa_x != fa_y:
-            self.rank[fa_y] += 1
+		fx,fy = self.father[x], self.father[y]
+		if fx != fy:
+			if self.rank[fx] < self.rank[fy]:
+				self.father[fx] = self.father[fy]
+				self.rank[fy] += self.rank[fx]
+			else:
+				self.father[fy] = self.father[fx]
+				self.rank[fx] += self.rank[fy]
+			self.counts -= 1
 
 if __name__ == "__main__":
     n = 6
