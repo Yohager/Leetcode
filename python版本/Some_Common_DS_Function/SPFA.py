@@ -8,7 +8,7 @@ class DistanceAlg():
     def construct_matrix(self):
         for edge in self.edges:
             self.graph[edge[0]-1].append([edge[1],edge[2]])
-            self.graph[edge[1]-1].append([edge[0],edge[2]])
+            #self.graph[edge[1]-1].append([edge[0],edge[2]])
     
     #求解path的过程(不带优化的代码)
     def dij(self,start):
@@ -36,7 +36,7 @@ class DistanceAlg():
         return costs, parents
 
     #对于dijistra算法的优化
-    def dij_opt(self,start):
+    def dij_opt(self,start,n):
         l = len(self.graph)
         q = pQueue()
         #进入队列中的元素应该为[cost,v]的形式
@@ -59,11 +59,12 @@ class DistanceAlg():
 
 
 if __name__ =="__main__":
-    n = 5
-    edges = [[1,2,3],[1,3,3],[2,3,1],[1,4,2],[5,2,2],[3,5,1],[5,4,10]]
+    n = 4
+    #edges = [[1,2,3],[1,3,3],[2,3,1],[1,4,2],[5,2,2],[3,5,1],[5,4,10]]
+    edges = [[2,1,1],[2,3,1],[3,4,1]]
     temp = DistanceAlg(edges,n)
     temp.construct_matrix()
-    c1,p1 = temp.dij(5)
-    c2,p2 = temp.dij_opt(5)
-    print(c1,c2)
-    print(p1,p2)
+    c1,p1 = temp.dij(1)
+    c2,p2 = temp.dij_opt(1,n)
+    print(c1,p1)
+    print(c2,p2)
