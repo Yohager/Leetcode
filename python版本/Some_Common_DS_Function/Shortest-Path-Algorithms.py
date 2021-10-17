@@ -88,15 +88,19 @@ def spfa(edges,n,start):
     q.append(src)
     dist[src] = 0
     visited[src] = True 
+    shortest_path_edges = []
     while q:
         x = q.popleft()
-        visited[x] = True 
+        visited[x] = True
+        tmp_x = []
         for y,c in adj[x]:
             if dist[x] + c < dist[y]:
+                tmp_x.append([x,y])
                 dist[y] = dist[x] + c 
                 visited[y] = True
                 q.append(y)
-    return dist 
+        shortest_path_edges.append(tmp_x)
+    return dist,shortest_path_edges
 
 
 if __name__ == "__main__":
