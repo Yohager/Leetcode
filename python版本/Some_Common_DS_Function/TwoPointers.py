@@ -6,7 +6,7 @@ def FindSubStrings(s):
     ans = 0
     while r < n:
         counter[s[r]] += 1
-        while True: #修改为区间不符合题意(l,r)
+        while 修改为区间不符合题意(l,r):
             counter[s[l]] -= 1
             l += 1
         ans = max(ans,r-l+1)
