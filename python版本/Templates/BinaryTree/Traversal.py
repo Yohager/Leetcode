@@ -239,7 +239,8 @@ class BinaryTreeTraversal:
 
 
 if __name__ == "__main__":
-    arr = [1,2,3,None,4,None,5]
+    # arr = [1,2,3,None,4,None,5]
+    arr = [1, 2, None, None, 3, 4, None]
     BTT = BinaryTreeTraversal(arr)
     BTT.CreateTree() 
     # BTT.PreOrder(BTT.tree)

@@ -27,4 +27,6 @@ def InitBinaryTree(arr):
 
 
 if __name__ == "__main__":
-    root = InitBinaryTree([1,2,4,None,None,4,5])
+    # root = InitBinaryTree([1,2,4,None,None,4,5])
+    root = InitBinaryTree([1, 2, None, None, 3, 4, None])
+    print(root)
