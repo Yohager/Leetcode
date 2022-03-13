@@ -45,6 +45,7 @@ class DistanceAlg():
         parents = [-1 for _ in range(l)]
         q.put([0,start,-1])
         while len(t) < n:
+            print(len(t))
             minpath = q.get()
             while visited[minpath[1]-1]:
                 minpath = q.get()
@@ -64,7 +65,7 @@ if __name__ =="__main__":
     edges = [[2,1,1],[2,3,1],[3,4,1]]
     temp = DistanceAlg(edges,n)
     temp.construct_matrix()
-    c1,p1 = temp.dij(1)
+    #c1,p1 = temp.dij(1)
     c2,p2 = temp.dij_opt(1,n)
-    print(c1,p1)
+    #print(c1,p1)
     print(c2,p2)

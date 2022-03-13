@@ -1,5 +1,16 @@
 #回溯算法和DFS求解全排列问题的模板
 
+回溯的基本思路
+def backtrack(参数):
+	if (终止条件):
+		添加结果
+		return 
+	for (选择 当前层集合中的元素):
+		处理当前的节点
+		backtrack(路径, 选择列表)
+		回溯撤销
+
+
 class BackTracking:
     def dfs_backtracking(self,nums):
         def dfs(nums,size,depth,path,used,ans):

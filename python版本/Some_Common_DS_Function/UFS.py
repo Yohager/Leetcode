@@ -33,15 +33,15 @@ class UFS():
             return self.father[x]
     
     def MergeElemWithRank(self,x,y):
-		fx,fy = self.father[x], self.father[y]
-		if fx != fy:
-			if self.rank[fx] < self.rank[fy]:
-				self.father[fx] = self.father[fy]
-				self.rank[fy] += self.rank[fx]
-			else:
-				self.father[fy] = self.father[fx]
-				self.rank[fx] += self.rank[fy]
-			self.counts -= 1
+        fx,fy = self.father[x], self.father[y]
+        if fx != fy:
+            if self.rank[fx] < self.rank[fy]:
+                self.father[fx] = self.father[fy]
+                self.rank[fy] += self.rank[fx]
+            else:
+                self.father[fy] = self.father[fx]
+                self.rank[fx] += self.rank[fy]
+            self.counts -= 1
 
 if __name__ == "__main__":
     n = 6
