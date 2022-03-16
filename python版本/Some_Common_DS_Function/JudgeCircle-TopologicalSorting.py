@@ -23,7 +23,7 @@ def topologicalsorting(n,edges):
             deg[e] -= 1
             if deg[e] == 1 and not visited[e]:
                 queue.append(e)
-                visited[e] == True 
+                visited[e] = True 
     for flag in visited:
         if flag == False:
             return False 
