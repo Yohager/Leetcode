@@ -2,9 +2,7 @@
 给定一个set
 返回set的所有子集
 '''
-from ast import Sub
 import itertools
-from turtle import st
 
 
 def Subsets1(arr):

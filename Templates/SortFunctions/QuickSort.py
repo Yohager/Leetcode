@@ -28,10 +28,11 @@ def QuickSort2(arr,l,r):
     pivot = arr[low]
     while low < high:
         while (low < high and arr[high] >= pivot):
-            # 从后向前扫描一次
+            # 从后向前扫描一次 找到第一个小于pivot的值
             high -= 1
         arr[low] = arr[high]
         while (low < high and arr[low] < pivot):
+            # 从前向后扫描一次找到第一个大于pivot的值
             low += 1
         arr[high] = arr[low]
     arr[low] = pivot
