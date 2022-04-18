@@ -8,6 +8,9 @@ heap sort
 heapq.heapify(list)
 维护一个最小堆
 '''
+import random 
+import time 
+import heapq 
 def HeapSort(arr):
     n = len(arr)
     # build the heap 
@@ -37,6 +40,15 @@ def heapify(arr,n,i):
         heapify(arr,n,largest) # 递归调整堆
 
 if __name__ == "__main__":
-    arr = [1,4,5,7,2,9,6]
-    HeapSort(arr)
-    print(arr)
+    # arr = [1,4,5,7,2,9,6]
+    #HeapSort(arr)
+    #heapq.heapify(arr)
+    arr = [random.randint(1,1000000) for _ in range(1000000)]
+    start = time.time()
+    nums = []
+    heapq.heapify(nums)
+    for a in arr:
+        heapq.heappush(nums,a)
+    print([heapq.heappop(nums) for _ in range(len(arr))])
+    end = time.time()
+    print(end-start) 

@@ -5,7 +5,8 @@ quick sort
 将大于pivot的元素放在pivot的右边
 左边与右边两个部分分别进行递归处理
 '''
-
+import random 
+import time 
 
 def QuickSort(arr):
     if len(arr) < 2:
@@ -28,10 +29,11 @@ def QuickSort2(arr,l,r):
     pivot = arr[low]
     while low < high:
         while (low < high and arr[high] >= pivot):
-            # 从后向前扫描一次
+            # 从后向前扫描一次 找到第一个小于pivot的值
             high -= 1
         arr[low] = arr[high]
         while (low < high and arr[low] < pivot):
+            # 从前向后扫描一次找到第一个大于pivot的值
             low += 1
         arr[high] = arr[low]
     arr[low] = pivot
@@ -40,7 +42,10 @@ def QuickSort2(arr,l,r):
 
 
 if __name__ == "__main__":
-    arr = [1,4,5,7,2,9,6]
+    arr = [random.randint(1,1000000) for _ in range(1000000)]
+    start = time.time()
     print(QuickSort(arr))
-    QuickSort2(arr,0,len(arr)-1)
-    print(arr)
+    # QuickSort2(arr,0,len(arr)-1)
+    # print(arr)
+    end = time.time()
+    print(end-start)

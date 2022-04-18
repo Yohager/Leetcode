@@ -18,8 +18,7 @@ class ST:
         self.tree[i] = val
         while i > 0:
             self.tree[i//2] = self.tree[i] + self.tree[i^1] 
-            i //= 2 
-    
+            i //= 2  
     def RangeSum(self,i,j):
         i += self.n 
         j += self.n 
