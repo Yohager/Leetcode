@@ -110,10 +110,82 @@ class SegmentTree2(object):
 				return self.QueryRange(k+k,l,m,s,m,p) + self.QueryRange(k+k+1,m+1,r,m+1,t,p)
 
 
+'''
+part three 
+标记下放 
+原本我们分为两个部分：上面路径的v以及下面路径的f
+标记希望我们只求一个部分
+我们考虑将上面的路径将v值往下穿是的前面的v都为0 
+父亲节点v清空，将两边的区间的v添加父亲节点的v
+但是需要考虑父亲节点的f值：解决方案：递归结束的时候反过来更新f值
+'''
+
+class SegmentTree3(object):
+	"""docstring for SegmentTree3"""
+	def __init__(self, nums):
+		super(SegmentTree3, self).__init__()
+		self.nums = nums 
+		self.n = len(self.nums)
+		self.t = [0] * (4*self.n+1)
+		self.v = [0] * (4*self.n+1)
+
+	def BuildTree(self,k,l,r):
+		if l == r:
+			self.t[k] = self.nums[l]
+			return 
+		m = (l+r) >> 1 
+		self.BuildTree(k+k,l,m)
+		self.BuildTree(k+k+1,m+1,r)
+		self.t[k] = self.t[k+k] + self.t[k+k+1]
+
+	def UpdateRange(self,k,l,r,x,y,z):
+		# 修改区间x到y的值为z
+		if (l == x) and (r == y):
+			self.v[k] += z 
+			return
+		# 标记下传
+		if self.v[k] != 0: 
+			self.v[k+k] += self.v[k]
+			self.v[k+k+1] += self.v[k]
+			self.v[k] = 0 
+		m = (l+r) >> 1
+		if y <= m:
+			self.UpdateRange(k+k,l,m,x,y,z)
+		else:
+			if x > m:
+				self.UpdateRange(k+k+1,m+1,r,x,y,z)
+			else:
+				self.UpdateRange(k+k,l,m,x,m,z) 
+				self.UpdateRange(k+k+1,m+1,r,m+1,y,z)
+		# 值更新
+		self.t[k] = self.t[k+k] + self.v[k+k] * (m-l+1) + self.t[k+k+1] + self.v[k+k+1] * (r-m)
+
+	def QueryRange(self,k,l,r,x,y):
+		if (l == x) and (r == y):
+			return self.t[k] + self.v[k] * (r-l+1)
+		# 标记下传
+		if self.v[k] != 0:
+			self.v[k+k] += self.v[k]
+			self.v[k+k+1] += self.v[k]
+			self.v[k] = 0 
+		m = (l+r) >> 1
+		ans = 0
+		if y <= m:
+			ans = self.QueryRange(k+k,l,m,x,y)
+		else:
+			if x > m:
+				ans = self.QueryRange(k+k+1,m+1,r,x,y)
+			else:
+				ans = self.QueryRange(k+k,l,m,x,m) + self.QueryRange(k+k+1,m+1,r,m+1,y)
+		# 值更新
+		self.t[k] = self.t[k+k] + self.v[k+k] * (m-l+1) + self.t[k+k+1] + self.v[k+k+1] * (r-m)
+		return ans 
+		
+
 if __name__ == "__main__":
 	n,m = list(map(int,input().split()))
 	nums = [0] + list(map(int,input().split()))
-	st = SegmentTree2(nums)
+	st = SegmentTree3(nums)
 	n = len(nums) - 1
 	st.BuildTree(1,1,n)
 	qs = []
@@ -126,5 +198,5 @@ if __name__ == "__main__":
 			st.UpdateRange(1,1,n,cur[1],cur[2],cur[3])
 		elif cur[0] == 2:
 			# 查询操作
-			print(st.QueryRange(1,1,n,cur[1],cur[2],0))
+			print(st.QueryRange(1,1,n,cur[1],cur[2]))
 

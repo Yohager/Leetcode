@@ -1,6 +1,6 @@
 '''
 映射规则
-f(s)=\sum_{i=1}^l s[i] B^{l-i} (mod M)
+f(s)=sum_{i=1}^l s[i] B^{l-i} (mod M)
 
 对于前缀来说，每个字符串最后多出来一个字符, 就相当于在原编码的值的基础上乘上一个base然后加上新的字符的编码值.
 对于后缀来说，每个字符串最前多出来一个字符, 就相当于原编码值加上新的字符的编码值乘以base的i-1次幂.
@@ -8,7 +8,7 @@ f(s)=\sum_{i=1}^l s[i] B^{l-i} (mod M)
 class StringHash:
     def __init__(self,s) -> None:
         self.M = int(1e9+7)
-        self.B = 31
+        self.B = 131
         self.s = s
         self.n = len(self.s)
         self.prefix = [0] * (self.n+1)
